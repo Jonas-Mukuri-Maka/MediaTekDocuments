@@ -146,6 +146,11 @@ namespace MediaTekDocuments.controller
             return access.GetAllEtatsDocument();
         }
 
+        public List<Abonnement> GetAllAbonnementsEcheance()
+        {
+            return access.GetAllAbonnementsEcheance();
+        }
+
         /// <summary>
         /// récupère les documents
         /// </summary>
@@ -154,6 +159,16 @@ namespace MediaTekDocuments.controller
         public List<Document> GetAllDocuments(string idDocument)
         {
             return access.GetAllDocuments(idDocument);
+        }
+
+        /// <summary>
+        /// récupère les abonnements d'une commande concerné
+        /// </summary>
+        /// <param name="idDocument">id de la commande concerné</param>
+        /// <returns>Liste d'objets Document</returns>
+        public List<Abonnement> GetAllAbonnements(string idDocument)
+        {
+            return access.GetAllAbonnements(idDocument);
         }
 
         /// <summary>
@@ -169,10 +184,7 @@ namespace MediaTekDocuments.controller
         /// <summary>
         /// Créé une commande de document dans la bdd
         /// </summary>
-        /// <param name="id">Id de la commande de document à insérer</param>
-        /// <param name="nbExemplaire">Nombre d'exemplaires de la commande de document</param>
-        /// <param name="idLivreDvd">Id du livreDvd correspondant à la commande de document</param>
-        /// <param name="idSuivi">Id de l'étape de suivi de la commande de document</param>
+        /// <param name="commandedocument">Objet de type CommandeDocument à ajouter</param>
         /// <returns>True si l'insertion a pu se faire</returns>
         public bool CreerCommandeDocument(CommandeDocument commandedocument)
         {
@@ -182,8 +194,7 @@ namespace MediaTekDocuments.controller
         /// <summary>
         /// Modifie l'étape de suivi d'une commande dans la bdd
         /// </summary>
-        /// <param name="id">Id de la commande de document à modifier</param>
-        /// <param name="idSuivi">Id de l'étape de suivi</param>
+        /// <param name="commandedocument">Objet de type CommandeDocument à modifier</param>
         /// <returns>True si la modification a pu se faire</returns>
         internal bool ModifierSuiviCommandeDocument(CommandeDocument commandedocument)
         {
@@ -193,12 +204,23 @@ namespace MediaTekDocuments.controller
         /// <summary>
         /// Supprimme une commande de document dans la bdd
         /// </summary>
-        /// <param name="commandesDocument">Objet de type CommandeDocument à supprimer</param>
+        /// <param name="commandeDocument">Objet de type CommandeDocument à supprimer</param>
         /// <returns>True si la suppression a pu se faire</returns>
         public bool SupprimerCommandeDocument(CommandeDocument commandeDocument)
         {
             return access.SupprimerCommandeDocument(commandeDocument);
         }
+
+        public bool CreerAbonnement(Abonnement abonnement)
+        {
+            return access.CreerAbonnement(abonnement);
+        }
+
+        public bool SupprimerAbonnement(Abonnement abonnement)
+        {
+            return access.SupprimerAbonnement(abonnement);
+        }
+
     }
 
 

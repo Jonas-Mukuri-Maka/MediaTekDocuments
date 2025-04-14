@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Xml.Linq;
 
 namespace MediaTekDocuments.dal
 {
@@ -185,7 +186,25 @@ namespace MediaTekDocuments.dal
             return lesCommandesDocument;
 
         }
-        
+
+        public List<Abonnement> GetAllAbonnements(string idDocument)
+        {
+
+            String jsonIdDocument = convertToJson("id", idDocument);
+            Console.WriteLine(jsonIdDocument);
+            List<Abonnement> lesAbonnements = TraitementRecup<Abonnement>(GET, "abonnement/" + jsonIdDocument, null);
+            return lesAbonnements;
+
+        }
+
+        public List<Abonnement> GetAllAbonnementsEcheance()
+        {
+
+            List<Abonnement> lesAbonnements = TraitementRecup<Abonnement>(GET, "abonnementecheance", null);
+            return lesAbonnements;
+
+        }
+
 
         /// <summary>
         /// Retourne les documents
@@ -275,6 +294,40 @@ namespace MediaTekDocuments.dal
             return false;
         }
 
+        public bool CreerAbonnement(Abonnement abonnement)
+        {
+            String jsonCreerAbonnement = JsonConvert.SerializeObject(abonnement, new CustomDateTimeConverter());
+            Console.WriteLine(jsonCreerAbonnement);
+            try
+            {
+                // récupération de liste vide ou null (empty/erreur)
+                List<Abonnement> liste = TraitementRecup<Abonnement>(POST, "abonnement", "champs=" + jsonCreerAbonnement);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        public bool SupprimerAbonnement(Abonnement abonnement)
+        {
+            String jsonSupprimerAbonnement = convertToJson("id", abonnement.id);
+            Console.WriteLine(jsonSupprimerAbonnement);
+            try
+            {
+                // récupération soit d'une liste vide (requête ok) soit de null (erreur)
+                List<Abonnement> liste = TraitementRecup<Abonnement>(DELETE, "abonnement/" + jsonSupprimerAbonnement, null);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
 
         /// <summary>
         /// Ecriture d'une commande de document en base de données
@@ -301,8 +354,7 @@ namespace MediaTekDocuments.dal
         /// <summary>
         /// Modification de l'étape de suivi d'une commande de document en base de données
         /// </summary>
-        /// <param name="id">Id de la commande de document à modifier</param>
-        /// <param name="idSuivi">Id de l'étape de suivi</param>
+        /// <param name="commandedocument">Objet de type CommandeDocument à modifier</param>
         /// <returns>True si la modification a pu se faire</returns>
         public bool ModifierSuiviCommandeDocument(CommandeDocument commandedocument)
         {
@@ -328,7 +380,7 @@ namespace MediaTekDocuments.dal
         /// <summary>
         /// Suppression d'une commande de document en base de données
         /// </summary>
-        /// <param name="commandesDocument">Objet de type CommandeDocument à supprimer</param>
+        /// <param name="commandedocument">Objet de type CommandeDocument à supprimer</param>
         /// <returns>True si la suppression a pu se faire</returns>
         public bool SupprimerCommandeDocument(CommandeDocument commandedocument)
         {
