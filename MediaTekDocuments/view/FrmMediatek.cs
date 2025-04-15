@@ -20,25 +20,62 @@ namespace MediaTekDocuments.view
         private readonly BindingSource bdgGenres = new BindingSource();
         private readonly BindingSource bdgPublics = new BindingSource();
         private readonly BindingSource bdgRayons = new BindingSource();
+        private readonly Utilisateur User;
+        private readonly List<Service> lesServices;
+        private readonly String libelle;
 
         /// <summary>
         /// Constructeur : création du contrôleur lié à ce formulaire
         /// </summary>
-        internal FrmMediatek()
+        internal FrmMediatek(Utilisateur utilisateur)
         {
-            InitializeComponent();
             this.controller = new FrmMediatekController();
+            User = utilisateur;
+            lesServices = controller.GetAllServices();
+            foreach (Service service in lesServices)
+            {
+                if (service.id == utilisateur.idService)
+                {
+                    libelle = service.libelle;
+                    break;
+                }
+            }
+            if (libelle == lesServices[2].libelle)
+            {
+                MessageBox.Show("Vous n'avez pas les droits suffisants pour accéder à cette application.",
+                                "Accès refusé", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Application.Exit();
+                return;
+            }
+            InitializeComponent();
+            ConfigurerAcces();
             this.Shown += FrmMediatek_Shown;
+
         }
 
         private void FrmMediatek_Shown(object sender, EventArgs e)
         {
-            List<Abonnement> abonnementsEcheance = controller.GetAllAbonnementsEcheance();
-
-            if (abonnementsEcheance.Count > 0)
+            if (libelle == lesServices[0].libelle || libelle == lesServices[3].libelle)
             {
-                frmAlerteAbonnement Alerte = new frmAlerteAbonnement();
-                Alerte.ShowDialog();
+                List<Abonnement> abonnementsEcheance = controller.GetAllAbonnementsEcheance();
+
+                if (abonnementsEcheance.Count > 0)
+                {
+                    frmAlerteAbonnement Alerte = new frmAlerteAbonnement();
+                    Alerte.ShowDialog();
+                }
+            }
+        }
+
+        private void ConfigurerAcces()
+        {
+
+            if (libelle == lesServices[1].libelle)
+            {
+                tabCommandeLivres.TabPages.Remove(tabCommandeLivre);
+                tabCommandeLivres.TabPages.Remove(tabCommandeDvds);
+                tabCommandeLivres.TabPages.Remove(tabCommandeRevues);
+                tabCommandeLivres.TabPages.Remove(tabReceptionRevue);
             }
         }
 
@@ -2183,5 +2220,6 @@ namespace MediaTekDocuments.view
 
 
         #endregion
+
     }
 }

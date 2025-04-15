@@ -222,14 +222,22 @@
     <Compile Include="controller\FrmMediatekController.cs" />
     <Compile Include="dal\Access.cs" />
     <Compile Include="model\Abonnement.cs" />
+    <Compile Include="model\Service.cs" />
     <Compile Include="model\Commande.cs" />
     <Compile Include="model\CommandeDocument.cs" />
     <Compile Include="model\Suivi.cs" />
+    <Compile Include="model\Utilisateur.cs" />
     <Compile Include="view\frmAlerteAbonnement.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="view\frmAlerteAbonnement.Designer.cs">
       <DependentUpon>frmAlerteAbonnement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\FrmAuthentication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\FrmAuthentication.Designer.cs">
+      <DependentUpon>FrmAuthentication.cs</DependentUpon>
     </Compile>
     <Compile Include="view\FrmMediatek.cs">
       <SubType>Form</SubType>
@@ -261,6 +269,9 @@
     </Compile>
     <EmbeddedResource Include="view\frmAlerteAbonnement.resx">
       <DependentUpon>frmAlerteAbonnement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\FrmAuthentication.resx">
+      <DependentUpon>FrmAuthentication.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\FrmMediatek.resx">
       <DependentUpon>FrmMediatek.cs</DependentUpon>

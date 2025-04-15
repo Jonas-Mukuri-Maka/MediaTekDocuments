@@ -399,6 +399,28 @@ namespace MediaTekDocuments.dal
             return false;
         }
 
+        public Utilisateur GetAuthentication(string login, string password)
+        {
+            String jsonAuthentification = JsonConvert.SerializeObject(new
+            {
+                login = login,
+                password = password
+            });
+            List<Utilisateur> utilisateurs = TraitementRecup<Utilisateur>(GET, "utilisateur/" + jsonAuthentification, null);
+
+            if (utilisateurs != null && utilisateurs.Count > 0)
+            {
+                
+                return utilisateurs[0];
+            }
+            return null;
+        }
+
+        public List<Service> GetAllServices()
+        {
+            List<Service> lesServices = TraitementRecup<Service>(GET, "service", null);
+            return lesServices;
+        }
 
         /// <summary>
         /// Traitement de la récupération du retour de l'api, avec conversion du json en liste pour les select (GET)

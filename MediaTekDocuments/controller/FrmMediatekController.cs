@@ -221,6 +221,15 @@ namespace MediaTekDocuments.controller
             return access.SupprimerAbonnement(abonnement);
         }
 
+        public Utilisateur GetAuthentication(string login, string password)
+        {
+            return access.GetAuthentication(login, password);
+        }
+
+        public List<Service> GetAllServices()
+        {
+            return access.GetAllServices();
+        }
     }
 
 
