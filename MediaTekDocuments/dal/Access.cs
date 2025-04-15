@@ -21,7 +21,11 @@ namespace MediaTekDocuments.dal
         /// <summary>
         /// adresse de l'API
         /// </summary>
-        private static readonly string uriApi = "http://localhost/rest_mediatekdocuments/";
+        private static readonly string uriApi = "MediaTekDocuments.Properties.Settings.MediatekDocumentsApiConnectionString";
+        /// <summary>
+        /// login et mot de pass de l'API
+        /// </summary>
+        private static readonly string authenticationString = "MediaTekDocuments.Properties.Settings.MediatekDocumentsAuthenticationString";
         /// <summary>
         /// instance unique de la classe
         /// </summary>
@@ -53,11 +57,11 @@ namespace MediaTekDocuments.dal
         /// </summary>
         private Access()
         {
-            String authenticationString;
             try
             {
-                authenticationString = "admin:adminpwd";
-                api = ApiRest.GetInstance(uriApi, authenticationString);
+                string ApiName = GetConnectionString(uriApi);
+                string AuthName = GetConnectionString(authenticationString);
+                api = ApiRest.GetInstance(ApiName, AuthName);
             }
             catch (Exception e)
             {
@@ -66,6 +70,19 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Récupération de la chaîne de connexion
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        static string GetConnectionString(string name)
+        {
+            string returnValue = null;
+            ConnectionStringSettings settings = ConfigurationManager.ConnectionStrings[name];
+            if (settings != null)
+                returnValue = settings.ConnectionString;
+            return returnValue;
+        }
         /// <summary>
         /// Création et retour de l'instance unique de la classe
         /// </summary>
