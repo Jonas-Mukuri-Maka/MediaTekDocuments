@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Xml.Linq;
+using Serilog;
 
 namespace MediaTekDocuments.dal
 {
@@ -59,12 +60,19 @@ namespace MediaTekDocuments.dal
         {
             try
             {
+                Log.Logger = new LoggerConfiguration()
+                    .MinimumLevel.Verbose()
+                    .WriteTo.Console()
+                    .WriteTo.File("logs/log.txt")
+                    .CreateLogger();
+
                 string ApiName = GetConnectionString(uriApi);
                 string AuthName = GetConnectionString(authenticationString);
                 api = ApiRest.GetInstance(ApiName, AuthName);
             }
             catch (Exception e)
             {
+                Log.Fatal(e, "Access.Access() - Erreur lors de la tentative de connexion à l'API : {0}", e.Message);
                 Console.WriteLine(e.Message);
                 Environment.Exit(0);
             }
@@ -284,6 +292,7 @@ namespace MediaTekDocuments.dal
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Access.CreerExemplaire - Erreur lors de la création d'un exemplaire: {0}", ex.Message);
                 Console.WriteLine(ex.Message);
             }
             return false;
@@ -306,6 +315,7 @@ namespace MediaTekDocuments.dal
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Access.CreerCommande - Erreur lors de la création d'une commande: {0}", ex.Message);
                 Console.WriteLine(ex.Message);
             }
             return false;
@@ -323,6 +333,7 @@ namespace MediaTekDocuments.dal
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Access.CreerAbonnement - Erreur lors de la création d'un abonnement: {0}", ex.Message);
                 Console.WriteLine(ex.Message);
             }
             return false;
@@ -340,6 +351,7 @@ namespace MediaTekDocuments.dal
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Access.SupprimerAbonnement - Erreur lors de la suppression d'un abonnement: {0}", ex.Message);
                 Console.WriteLine(ex.Message);
             }
             return false;
@@ -363,6 +375,7 @@ namespace MediaTekDocuments.dal
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Access.CreerCommandeDocument - Erreur lors de la création d'une commande document: {0}", ex.Message);
                 Console.WriteLine(ex.Message);
             }
             return false;
@@ -389,6 +402,7 @@ namespace MediaTekDocuments.dal
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Access.ModifierSuiviCommandeDocument - Erreur lors de la modification d'étape d'une commande document: {0}", ex.Message);
                 Console.WriteLine(ex.Message);
             }
             return false;
@@ -411,6 +425,7 @@ namespace MediaTekDocuments.dal
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Access.SupprimerCommandeDocument - Erreur lors de la suppression d'une commande document: {0}", ex.Message);
                 Console.WriteLine(ex.Message);
             }
             return false;
