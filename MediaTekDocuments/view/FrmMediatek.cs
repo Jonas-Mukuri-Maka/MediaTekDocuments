@@ -20,7 +20,6 @@ namespace MediaTekDocuments.view
         private readonly BindingSource bdgGenres = new BindingSource();
         private readonly BindingSource bdgPublics = new BindingSource();
         private readonly BindingSource bdgRayons = new BindingSource();
-        private readonly Utilisateur User;
         private readonly List<Service> lesServices;
         private readonly String libelle;
 
@@ -30,7 +29,6 @@ namespace MediaTekDocuments.view
         internal FrmMediatek(Utilisateur utilisateur)
         {
             this.controller = new FrmMediatekController();
-            User = utilisateur;
             lesServices = controller.GetAllServices();
             foreach (Service service in lesServices)
             {
@@ -1501,7 +1499,7 @@ namespace MediaTekDocuments.view
 
                 }
             }
-            catch (NullReferenceException)
+            catch
             {
                 MessageBox.Show("La nouvelle étape de suivi de la commande doit être sélectionnée.", "Information");
             }
@@ -1844,9 +1842,10 @@ namespace MediaTekDocuments.view
                     lblCommandeDvdsEtapeSuivi.Text = commandedocument.Libelle;
                 }
             }
-            catch (NullReferenceException)
+            catch
             {
                 MessageBox.Show("La nouvelle étape de suivi de la commande doit être sélectionnée.", "Information");
+                throw;
             }
         }
 
@@ -2174,15 +2173,8 @@ namespace MediaTekDocuments.view
         public bool ExemplaireExiste(Abonnement abonnement)
         {
             List<Exemplaire> lesexemplaires = controller.GetExemplairesRevue(abonnement.idRevue);
-            bool existe = true;
-            foreach (Exemplaire exemplaire in lesexemplaires)
-            {
-                if (ParutionDansAbonnement(abonnement.dateCommande, abonnement.dateFinAbonnement, exemplaire.DateAchat))
-                {
-                    existe = false;
-                }
-
-            }
+            bool existe = lesexemplaires.Exists(exemplaire =>
+        ParutionDansAbonnement(abonnement.dateCommande, abonnement.dateFinAbonnement, exemplaire.DateAchat));
             return existe;
         }
 

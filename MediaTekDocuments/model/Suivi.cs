@@ -17,10 +17,5 @@ namespace MediaTekDocuments.model
             this.Libelle = libelle;
         }
         
-        /*public override string ToString()
-        {
-            return Libelle;
-        }
-        */
     }
 }
