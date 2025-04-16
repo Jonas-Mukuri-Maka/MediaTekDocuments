@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace MediaTekDocuments.model
 {
-
+    /// <summary>
+    /// Classe métier Utilisateur
+    /// </summary>
     public class Utilisateur
     {
 

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MediaTekDocuments.model
 {
+    /// <summary>
+    /// Classe métier Abonnement hérite de Commande
+    /// </summary>
     public class Abonnement : Commande
     {
         public DateTime dateFinAbonnement { get; set; }

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace MediaTekDocuments.model
 {
+    /// <summary>
+    /// Classe métier CommandeDocument hérite de Commande
+    /// </summary>
     public class CommandeDocument : Commande
     {
         public string idLivreDvd { get; set; }

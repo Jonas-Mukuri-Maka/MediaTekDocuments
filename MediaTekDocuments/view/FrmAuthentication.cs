@@ -17,12 +17,21 @@ namespace MediaTekDocuments.view
         private readonly FrmMediatekController controller;
         private Utilisateur utilisateur;
         public Utilisateur User => utilisateur;
+
+        /// <summary>
+        /// Constructeur : création du contrôleur lié à ce formulaire
+        /// </summary>
         public FrmAuthentication()
         {
             InitializeComponent();
             controller = new FrmMediatekController();
         }
 
+        /// <summary>
+        /// Gère la tentative de connexion de l'utilisateur en vérifiant ses identifiants.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnConnecter_Click(object sender, EventArgs e)
         {
             string login = txbLogin.Text;

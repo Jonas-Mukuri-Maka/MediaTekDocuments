@@ -211,21 +211,41 @@ namespace MediaTekDocuments.controller
             return access.SupprimerCommandeDocument(commandeDocument);
         }
 
+        /// <summary>
+        /// Ecriture d'un abonnement en base de données
+        /// </summary>
+        /// <param name="abonnement">Objet de type Abonnement à insérer</param>
+        /// <returns>True si l'insertion a pu se faire</returns>
         public bool CreerAbonnement(Abonnement abonnement)
         {
             return access.CreerAbonnement(abonnement);
         }
 
+        /// <summary>
+        /// Ecriture d'un abonnement en base de données
+        /// </summary>
+        /// <param name="abonnement">Objet de type Abonnement à insérer</param>
+        /// <returns>True si la suppression a pu se faire</returns>
         public bool SupprimerAbonnement(Abonnement abonnement)
         {
             return access.SupprimerAbonnement(abonnement);
         }
 
+        /// <summary>
+        /// authentification du login et mote de pas d'un utilisateur
+        /// </summary>
+        /// <param name="login">string du login à insérer</param>
+        /// <param name="password">string du mot de passe à insérer</param>
+        /// <returns>liste contentant un seul objet Utilisateur</returns>
         public Utilisateur GetAuthentication(string login, string password)
         {
             return access.GetAuthentication(login, password);
         }
 
+        /// <summary>
+        /// Retourne les services
+        /// </summary>
+        /// <returns>Liste d'objets Service</returns>
         public List<Service> GetAllServices()
         {
             return access.GetAllServices();

@@ -165,7 +165,7 @@ namespace MediaTekDocuments.dal
         }
 
         /// <summary>
-        /// Retourne les suivis d'un document
+        /// Retourne les suivis
         /// </summary>
         /// <returns>Liste d'objets Suivi</returns>
         public List<Suivi> GetAllSuivis()
@@ -212,6 +212,11 @@ namespace MediaTekDocuments.dal
 
         }
 
+        /// <summary>
+        /// Retourne les abonnements d'un revue
+        /// </summary>
+        /// <param name="idDocument">id du revue concerné</param>
+        /// <returns>Liste d'objets lesAbonnements</returns>
         public List<Abonnement> GetAllAbonnements(string idDocument)
         {
 
@@ -222,6 +227,10 @@ namespace MediaTekDocuments.dal
 
         }
 
+        /// <summary>
+        /// Retourne les abonnements d'un revue si ca date de fin d'abonnement est proche
+        /// </summary>
+        /// <returns>Liste d'objets lesAbonnements</returns>
         public List<Abonnement> GetAllAbonnementsEcheance()
         {
 
@@ -321,6 +330,11 @@ namespace MediaTekDocuments.dal
             return false;
         }
 
+        /// <summary>
+        /// Ecriture d'un abonnement en base de données
+        /// </summary>
+        /// <param name="abonnement">Objet de type Abonnement à insérer</param>
+        /// <returns>True si l'insertion a pu se faire</returns>
         public bool CreerAbonnement(Abonnement abonnement)
         {
             String jsonCreerAbonnement = JsonConvert.SerializeObject(abonnement, new CustomDateTimeConverter());
@@ -339,6 +353,11 @@ namespace MediaTekDocuments.dal
             return false;
         }
 
+        /// <summary>
+        /// Ecriture d'un abonnement en base de données
+        /// </summary>
+        /// <param name="abonnement">Objet de type Abonnement à insérer</param>
+        /// <returns>True si la suppression a pu se faire</returns>
         public bool SupprimerAbonnement(Abonnement abonnement)
         {
             String jsonSupprimerAbonnement = convertToJson("id", abonnement.id);
@@ -431,6 +450,12 @@ namespace MediaTekDocuments.dal
             return false;
         }
 
+        /// <summary>
+        /// authentification du login et mote de pas d'un utilisateur
+        /// </summary>
+        /// <param name="login">string du login à insérer</param>
+        /// <param name="password">string du mot de passe à insérer</param>
+        /// <returns>liste contentant un seul objet Utilisateur</returns>
         public Utilisateur GetAuthentication(string login, string password)
         {
             String jsonAuthentification = JsonConvert.SerializeObject(new
@@ -448,6 +473,10 @@ namespace MediaTekDocuments.dal
             return null;
         }
 
+        /// <summary>
+        /// Retourne les services
+        /// </summary>
+        /// <returns>Liste d'objets Service</returns>
         public List<Service> GetAllServices()
         {
             List<Service> lesServices = TraitementRecup<Service>(GET, "service", null);

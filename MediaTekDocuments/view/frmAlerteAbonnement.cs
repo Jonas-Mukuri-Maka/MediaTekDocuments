@@ -17,6 +17,10 @@ namespace MediaTekDocuments.view
         private readonly FrmMediatekController controller;
         private readonly List<Abonnement> lesAbonnementsEcheance;
         private readonly List<Revue> lesRevues;
+
+        /// <summary>
+        /// Constructeur : création du contrôleur lié à ce formulaire
+        /// </summary>
         public frmAlerteAbonnement()
         {
             InitializeComponent();
@@ -26,6 +30,9 @@ namespace MediaTekDocuments.view
             RemplirAbonnementsEcheanceListe();
         }
 
+        /// <summary>
+        /// Remplit la liste des abonnements arrivant à échéance avec les titres de revues et les dates de fin.
+        /// </summary>
         private void RemplirAbonnementsEcheanceListe()
         {
             lvAbonnementsEcheance.Items.Clear();
@@ -53,6 +60,11 @@ namespace MediaTekDocuments.view
             lvAbonnementsEcheance.Refresh();
         }
 
+        /// <summary>
+        /// Ferme la fenêtre actuelle lorsque l'utilisateur confirme avec le bouton OK.
+        /// </summary>
+        /// /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAbonneOk_Click(object sender, EventArgs e)
         {
             Close();
