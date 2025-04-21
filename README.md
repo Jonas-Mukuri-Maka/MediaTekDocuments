@@ -29,9 +29,9 @@ La grille de données située au centre de la fenêtre présente les commandes l
 ## Informations de commande
 À droite de la grille se trouve le panneau **informations de commande**, permettant d'ajouter ou de supprimer une commande. Les champs présents sont :
 <ul>
-  <li><strong>ID de la commande</strong> : L’identifiant unique de la commande.</li>
-  <li><strong>Quantité d’exemplaires</strong> : Le nombre d'exemplaires commandés.</li>
-  <li><strong>Montant total</strong> : Le montant total de la commande.</li>
+  <li><strong>id de la commande</strong> : L’identifiant unique de la commande.</li>
+  <li><strong>nbr d’exemplaires</strong> : Le nombre d'exemplaires commandés.</li>
+  <li><strong>Montant</strong> : Le montant total de la commande.</li>
   <li><strong>Date de commande</strong> : La date de la commande.</li>
 </ul>
 Un bouton **Ajouter** permet de créer une nouvelle **CommandeDocument**, liée à un **LivreDvd**. Ce bouton enregistre les données dans la base de données. Le bouton **Supprimer** permet de supprimer une commande, uniquement si elle n'a pas encore été livrée (c'est-à-dire si son état de suivi n'est pas "livrée").
@@ -39,10 +39,10 @@ Un bouton **Ajouter** permet de créer une nouvelle **CommandeDocument**, liée 
 ## Étape de suivi
 Sous les informations de commande, en clickant le bouton **Suivi** du panneau **informations de commande**, **groupbox "étape de suivi"** permet de modifier l'état d'une commande existante. L'utilisateur peut sélectionner un nouvel état de suivi via une liste déroulante et cliquer sur **Modifier** pour mettre à jour l'état de la commande dans la base de données. Les états disponibles sont :
 <ul>
-  <li><strong>"En cours"</strong> : La commande a été passée et doit être livrée.</li>
-  <li><strong>"Livrée"</strong> : La commande a été livrée et peut être réglée.</li>
-  <li><strong>"Réglée"</strong> : La transaction est complète et le paiement a été effectué.</li>
-  <li><strong>"Relancée"</strong> : Si une erreur ou un problème survient, la commande peut être relancée, ce qui la fait revenir à l'état "en cours".</li>
+  <li><strong>"en cours"</strong> : La commande a été passée et doit être livrée.</li>
+  <li><strong>"livrée"</strong> : La commande a été livrée et peut être réglée.</li>
+  <li><strong>"réglée"</strong> : La transaction est complète et le paiement a été effectué.</li>
+  <li><strong>"relancée"</strong> : Si une erreur ou un problème survient, la commande peut être relancée, ce qui la fait revenir à l'état "en cours".</li>
 </ul>
 Lorsque l'état d'une commande devient "livrée", le système génère automatiquement les exemplaires correspondants dans la base de données, avec un numéro séquentiel.
 ### Onglet : Commande de Dvds
@@ -84,11 +84,11 @@ La structure relationnelle de cette base permet une organisation claire et une e
 Les entités <strong>livre</strong>, <strong>dvd</strong> et <strong>revue</strong> sont reliées à la table <strong>document</strong> par des clés étrangères, 
 centralisant ainsi les données communes tout en permettant la gestion de leurs spécificités propres.<br><br>
 Les commandes, stockées dans la table <strong>commandedocument</strong>, sont associées aux documents via leur identifiant, 
-et leur état est suivi à l’aide de la table <strong>suivi</strong>.<br><br>
+et leur état est suivi à l’aide de la table <strong>suivi</strong>.
 Pour les revues, les <strong>abonnements</strong> sont enregistrés dans une table dédiée, 
-avec des champs indiquant la date de commande, de début et de fin.<br><br>
+avec des champs indiquant la date de commande, de début et de fin.
 La table <strong>exemplaire</strong> enregistre physiquement chaque exemplaire livré, 
-lié à son document d’origine, son état et son numéro.<br><br>
+lié à son document d’origine, son état et son numéro.
 L’ensemble du schéma assure une traçabilité complète des documents, des commandes et des abonnements, 
 tout en s’appuyant sur une gestion fine des utilisateurs et de leurs droits d’accès.
 ## L'API REST
