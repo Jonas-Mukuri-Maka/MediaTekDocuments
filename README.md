@@ -2,7 +2,6 @@
 Cette application permet de gérer les documents (livres, DVD, revues) d'une médiathèque. Elle a été codée en C# sous Visual Studio 2019. C'est une application de bureau, prévue d'être installée sur plusieurs postes accédant à la même base de données.<br>
 L'application exploite une API REST pour accéder à la BDD MySQL. Des explications sont données plus loin, ainsi que le lien de récupération.
 ## Présentation
-<br><br>
 MediatekDocuments est une application de gestion destinée aux bibliothèques.<br>
 Elle permet de gérer les documents (livres, DVD, revues), leurs commandes, ainsi que les abonnements, tout en assurant un accès sécurisé via un système d’authentification.
 ![img1](https://github.com/CNED-SLAM/MediaTekDocuments/assets/100127886/9b5a4c1b-6914-4455-94bf-fec24adba3ec)
