@@ -4,8 +4,7 @@ L'application exploite une API REST pour accéder à la BDD MySQL. Des explicati
 ## Présentation
 MediatekDocuments est une application de gestion destinée aux bibliothèques.<br>
 Elle permet de gérer les documents (livres, DVD, revues), leurs commandes, ainsi que les abonnements, tout en assurant un accès sécurisé via un système d’authentification.
-![img1](https://github.com/CNED-SLAM/MediaTekDocuments/assets/100127886/9b5a4c1b-6914-4455-94bf-fec24adba3ec)
-<br>L'application ne comporte qu'une seule fenêtre divisée en plusieurs onglets.
+L'application ne comporte qu'une seule fenêtre divisée en plusieurs onglets.
 ## Les différents onglets
 ### Onglet : Commandes de Livres
 L'interface permet de gérer les commandes des livres. Lorsqu'un document est sélectionné dans la liste des livres, les informations détaillées du livre (titre, auteur, genre, rayon, etc.) s'affichent. Ces données proviennent de la table **LivreDvd** et sont mises à jour après une recherche par le numéro de document dans la zone de recherche.<br>
